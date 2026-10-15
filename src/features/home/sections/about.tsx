@@ -8,7 +8,7 @@ import { ArrowRightIcon } from "@/assets/icons/arrow";
 
 export const AboutSection = () => {
 	return (
-		<section className="relative flex h-screen justify-end">
+		<section className="relative flex h-screen scroll-mt-20 justify-end" id="why-us">
 			<Image
 				alt=""
 				className="object-cover object-top"

@@ -90,7 +90,10 @@ const FAQS = [
 
 export const Faq = () => {
 	return (
-		<section className="relative flex flex-col bg-brand p-6 pb-24 sm:p-12 md:flex-row md:justify-between md:p-16">
+		<section
+			className="relative flex flex-col scroll-mt-20 bg-brand p-6 pb-24 sm:p-12 md:flex-row md:justify-between md:p-16"
+			id="faqs"
+		>
 			<div className="z-10 mb-6 h-fit max-w-3xl md:sticky md:top-[25vh] md:mb-0">
 				<div>
 					<h2 className="inline-flex items-center gap-2 text-gold-200">

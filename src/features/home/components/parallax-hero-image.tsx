@@ -6,7 +6,15 @@ import Image from "next/image";
 
 import { motion, useScroll, useTransform } from "motion/react";
 
-export function ParallaxImage() {
+interface ParallaxImageProps {
+	src?: string;
+	alt?: string;
+}
+
+export function ParallaxImage({
+	src = "/images/hero-banner.webp",
+	alt = "Background image",
+}: ParallaxImageProps = {}) {
 	const containerRef = useRef<HTMLDivElement | null>(null);
 	const { scrollYProgress } = useScroll({
 		target: containerRef,
@@ -21,12 +29,12 @@ export function ParallaxImage() {
 			style={{ y: translateY }}
 		>
 			<Image
-				alt="Background image"
+				alt={alt}
 				className="object-cover opacity-80"
 				fill
 				loading="eager"
 				priority
-				src="/images/hero-banner.webp"
+				src={src}
 			/>
 		</motion.div>
 	);

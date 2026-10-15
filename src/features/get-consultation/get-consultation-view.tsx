@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { EnvelopeSimpleIcon, MapPinIcon, CircleDashedIcon } from "@phosphor-icons/react/dist/ssr";
 
 import { ConsultationForm } from "./components/consultation-form";
@@ -5,7 +6,7 @@ import { ConsultationForm } from "./components/consultation-form";
 export function GetConsultationView() {
 	return (
 		<main className="flex-1 bg-foreground text-background pt-24 pb-16 md:pt-32">
-			<div className="mx-auto max-w-7xl px-6 sm:px-9 md:px-16">
+			<div className="px-6 py-12 sm:px-9 md:px-16">
 				<div className="grid items-start gap-12 md:grid-cols-2 lg:gap-24">
 					{/* Left Column: Text */}
 					<div className="space-y-6 md:sticky md:top-32 md:space-y-8">
@@ -13,10 +14,10 @@ export function GetConsultationView() {
 							<CircleDashedIcon className="animate-spin text-primary" />
 							Get in touch.
 						</h2>
-						<h1 className="text-balance font-display text-4xl text-background leading-none tracking-tight md:text-5xl lg:text-7xl">
+						<h1 className="max-w-5xl font-display text-2xl text-background leading-snug md:text-5xl">
 							Let&apos;s build your business together.
 						</h1>
-						<p className="max-w-lg text-pretty text-brand-foreground text-lg leading-snug md:text-xl">
+						<p className="max-w-lg text-pretty text-brand-foreground text-base leading-snug md:text-xl">
 							Launch, manage, and grow your company with expert guidance from
 							one of the UAE’s trusted business setup consultants. Fill out the
 							form and we&apos;ll be in touch shortly to discuss your
@@ -47,7 +48,15 @@ export function GetConsultationView() {
 					</div>
 
 					{/* Right Column: Form */}
-					<ConsultationForm />
+					<Suspense
+						fallback={
+							<div className="rounded-lg border border-border/10 bg-black/20 p-8 text-center text-muted-foreground">
+								Loading form...
+							</div>
+						}
+					>
+						<ConsultationForm />
+					</Suspense>
 				</div>
 			</div>
 		</main>

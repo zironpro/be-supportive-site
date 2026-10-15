@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import { ListIcon, PhoneCallIcon } from "@phosphor-icons/react";
 
@@ -24,6 +25,7 @@ import { cn } from "@/lib/utils";
 
 export function Navbar() {
 	const scrolled = useScroll(10);
+	const pathname = usePathname();
 
 	return (
 		<header
@@ -47,20 +49,36 @@ export function Navbar() {
 						/>
 					</Link>
 					<div className="hidden items-center gap-3 md:flex">
-						{NAV_ITEMS.map((item) => (
-							<Button
-								className={cn(
-									"h-8 border-brand/20 bg-muted-foreground/12 px-3 font-normal text-primary-foreground tracking-wider backdrop-blur-lg hover:bg-brand-secondary hover:text-primary",
-									{ "text-card": !scrolled }
-								)}
-								key={item.href}
-								nativeButton={false}
-								render={<Link href={item.href} />}
-								variant="ghost"
-							>
-								{item.label}
-							</Button>
-						))}
+						{NAV_ITEMS.map((item) => {
+							const isActive =
+								item.href === "/"
+									? pathname === "/"
+									: pathname === item.href ||
+										(item.href !== "/#" &&
+											!item.href.includes("#") &&
+											pathname.startsWith(item.href));
+
+							return (
+								<Button
+									className={cn(
+										"h-8 border-brand/20 px-3 font-normal tracking-wider backdrop-blur-lg transition-all",
+										isActive
+											? scrolled
+												? "bg-brand text-card font-medium shadow-xs"
+												: "bg-white/20 text-card font-medium border-primary/50 shadow-xs"
+											: scrolled
+												? "bg-muted-foreground/12 text-primary-foreground hover:bg-brand-secondary hover:text-primary"
+												: "bg-muted-foreground/12 text-card hover:bg-brand-secondary hover:text-primary"
+									)}
+									key={item.href}
+									nativeButton={false}
+									render={<Link href={item.href} />}
+									variant="ghost"
+								>
+									{item.label}
+								</Button>
+							);
+						})}
 					</div>
 				</nav>
 
@@ -96,22 +114,35 @@ export function Navbar() {
 								</DrawerHeader>
 								<DrawerPanel>
 									<nav className="-mx-[calc(--spacing(3)-1px)] flex flex-col gap-0.5">
-										{NAV_ITEMS.map((item) => (
-											<DrawerClose
-												key={item.href}
-												nativeButton={false}
-												render={
-													<Button
-														className="justify-start"
-														nativeButton={false}
-														render={<Link href={item.href} />}
-														variant="ghost"
-													/>
-												}
-											>
-												{item.label}
-											</DrawerClose>
-										))}
+										{NAV_ITEMS.map((item) => {
+											const isActive =
+												item.href === "/"
+													? pathname === "/"
+													: pathname === item.href ||
+														(item.href !== "/#" &&
+															!item.href.includes("#") &&
+															pathname.startsWith(item.href));
+
+											return (
+												<DrawerClose
+													key={item.href}
+													nativeButton={false}
+													render={
+														<Button
+															className={cn(
+																"justify-start text-base transition-colors",
+																isActive && "bg-brand/10 text-primary font-semibold"
+															)}
+															nativeButton={false}
+															render={<Link href={item.href} />}
+															variant="ghost"
+														/>
+													}
+												>
+													{item.label}
+												</DrawerClose>
+											);
+										})}
 									</nav>
 								</DrawerPanel>
 								<DrawerFooter variant="default">

@@ -8,10 +8,10 @@ import { Logo } from "@/assets/logo";
 import { NAV_ITEMS } from "@/config/navigation";
 
 const SERVICE_LINKS = [
-	{ label: "Business Setup UAE", href: "/services/business-setup-uae" },
-	{ label: "PRO Services UAE", href: "/services/pro-services-uae" },
-	{ label: "Visa Services UAE", href: "/services/visa-services-uae" },
-	{ label: "VAT Registration UAE", href: "/services/vat-registration-uae" },
+	{ label: "Business Setup UAE", href: "/services#business-setup" },
+	{ label: "PRO Services UAE", href: "/services#pro-services" },
+	{ label: "Visa Services UAE", href: "/services#visa-services" },
+	{ label: "VAT & Corporate Tax UAE", href: "/services#vat-tax" },
 ];
 
 export function Footer() {

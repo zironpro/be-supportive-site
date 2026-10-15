@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
+import { useSearchParams } from "next/navigation";
 
 import { ArrowRightIcon } from "@phosphor-icons/react/dist/ssr";
 
@@ -18,6 +19,10 @@ const initialState: ConsultationFormState = {
 };
 
 export function ConsultationForm() {
+	const searchParams = useSearchParams();
+	const defaultService =
+		searchParams.get("service") || searchParams.get("jurisdiction") || "";
+
 	const [state, formAction, isPending] = useActionState(
 		sendConsultationEmail,
 		initialState
@@ -33,7 +38,7 @@ export function ConsultationForm() {
 					<h3 className="font-display text-2xl text-background tracking-tight">
 						Request Sent Successfully!
 					</h3>
-					<p className="text-lg text-brand-foreground">{state.message}</p>
+					<p className="text-base sm:text-lg text-brand-foreground">{state.message}</p>
 				</div>
 			</div>
 		);
@@ -103,6 +108,7 @@ export function ConsultationForm() {
 					<Label className="text-background" htmlFor="service">Service of Interest</Label>
 					<Input
 						className="h-12 w-full rounded-lg border border-border/20 bg-black/20 px-4 text-base text-background transition-colors placeholder:text-muted-foreground/50 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary"
+						defaultValue={defaultService}
 						disabled={isPending}
 						id="service"
 						name="service"
