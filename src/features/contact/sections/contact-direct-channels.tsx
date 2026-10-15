@@ -5,7 +5,17 @@ import {
 	PhoneCallIcon,
 } from "@phosphor-icons/react/dist/ssr";
 
-const CONTACT_CHANNELS = [
+interface ContactChannel {
+	icon: React.ComponentType<{ size?: number; weight?: "fill" | "regular" | "bold" }>;
+	title: string;
+	primary: string;
+	secondary: string;
+	actionText: string;
+	href: string;
+	target?: string;
+}
+
+const CONTACT_CHANNELS: ContactChannel[] = [
 	{
 		icon: MapPinIcon,
 		title: "Head Office",
@@ -39,7 +49,7 @@ const CONTACT_CHANNELS = [
 		actionText: "Book Slot",
 		href: "#contact-form",
 	},
-] as const;
+];
 
 export const ContactDirectChannels = () => {
 	return (
