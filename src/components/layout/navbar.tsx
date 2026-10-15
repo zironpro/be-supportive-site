@@ -53,10 +53,7 @@ export function Navbar() {
 							const isActive =
 								item.href === "/"
 									? pathname === "/"
-									: pathname === item.href ||
-										(item.href !== "/#" &&
-											!item.href.includes("#") &&
-											pathname.startsWith(item.href));
+									: !item.href.includes("#") && pathname.startsWith(item.href);
 
 							return (
 								<Button
@@ -118,10 +115,7 @@ export function Navbar() {
 											const isActive =
 												item.href === "/"
 													? pathname === "/"
-													: pathname === item.href ||
-														(item.href !== "/#" &&
-															!item.href.includes("#") &&
-															pathname.startsWith(item.href));
+													: !item.href.includes("#") && pathname.startsWith(item.href);
 
 											return (
 												<DrawerClose
